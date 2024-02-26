@@ -6,6 +6,6 @@ import org.dnyanyog.dto.LoginResponse;
 public interface LoginService {
 
 
-    public LoginResponse validateUser(LoginRequest loginRequest);
+    public LoginResponse validateUser(LoginRequest loginRequest) throws Exception;
 
     }

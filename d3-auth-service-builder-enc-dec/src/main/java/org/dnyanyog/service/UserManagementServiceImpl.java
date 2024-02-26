@@ -29,7 +29,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 
 		Users usersTable = Users.getInstance();
 //    Users usersTable = new Users(); // Create table object in which we set data from request
-
+		System.out.println(encryptionservice.encrypt(request.getPassword()));
 		usersTable.setAge(request.getAge())
 				.setEmail(request.getEmail())
 				.setPassword(encryptionservice.encrypt(request.getPassword()))
