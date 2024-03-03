@@ -3,6 +3,8 @@ package org.dnyanyog.dto;
 import org.springframework.format.annotation.NumberFormat;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
 //@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,6 +20,8 @@ public class UserData {
 	private String email;
 	
 	@NotEmpty(message = "age could not be empty or null.")
+	@Min(value = 1, message = "Password can not be less than 1 char")
+	@Max(value = 2, message = "Password can not be more than 2 char")
 	@NumberFormat
 	private String age;
 
