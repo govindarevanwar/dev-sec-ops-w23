@@ -23,16 +23,11 @@ public interface UsersRepository extends JpaRepository<Users, Long> { // Query c
   @Query(value = "SELECT * FROM Users u WHERE u.email = ?1 or  u.username = ?2", nativeQuery = true)
   List<Users> findByUsingEmailOrUserName(String email, String username);
 
-
   @Query(value = "SELECT u.user_id FROM Users u ", nativeQuery = true)
   List<Long> findByIdOfAllUsers();
-  
-  @Query(value = "SELECT * FROM Users u WHERE u.email = ?1 and  u.username = ?2", nativeQuery = true)
+
+  @Query(
+      value = "SELECT * FROM Users u WHERE u.email = ?1 and  u.username = ?2",
+      nativeQuery = true)
   List<Users> findByUsingEmailAndUserNames(String email, String username);
-  
 }
-
-
-
-
-

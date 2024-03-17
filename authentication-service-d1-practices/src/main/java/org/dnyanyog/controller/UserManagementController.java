@@ -1,17 +1,16 @@
 package org.dnyanyog.controller;
 
 import java.util.List;
-
 import org.dnyanyog.dto.AddUserRequest;
 import org.dnyanyog.dto.AddUserResponse;
 import org.dnyanyog.entity.Users;
-import org.dnyanyog.service.UserManagementService;
+import org.dnyanyog.service.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserManagementController {
-  @Autowired UserManagementService userService;
+  @Autowired UserManagementServiceImpl userService;
 
   @PostMapping(
       path = "/api/v1/auth/user",
@@ -40,6 +39,7 @@ public class UserManagementController {
   @PostMapping(path = "/api/v1/auth/user_search")
   public List<Users> getFilteredUser(@RequestParam String email, @RequestParam String username) {
     System.out.println(email + " " + username);
-    return userService.findByUsingEmailAndUserName(email, username); // Implement Search with email and username : Assignment 1
+    return userService.findByUsingEmailAndUserName(
+        email, username); // Implement Search with email and username : Assignment 1
   }
 }

@@ -1,7 +1,5 @@
 package org.dnyanyog.service;
 
-import static java.util.Objects.nonNull;
-
 import java.util.List;
 import java.util.Optional;
 import org.dnyanyog.dto.AddUserRequest;
@@ -14,26 +12,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserManagementService {
+public class UserManagementServiceImpl implements UserManagementService {
 
-  Logger logger = LoggerFactory.getLogger(UserManagementService.class);
+  Logger logger = LoggerFactory.getLogger(UserManagementServiceImpl.class);
+
   @Autowired
   UsersRepository
       userRepo; // Ask Spring to give object of 'Query class for Users' i.e UserRepository
+
   @Autowired AddUserResponse userResponse;
- 
 
   public Optional<AddUserResponse> addUpdateUser(AddUserRequest request) {
 
-    Users usersTable = new Users(); // Create table object in which we set data from request
+    Users usersTable = Users.getInstance();
+    //    Users usersTable = new Users(); // Create table object in which we set data from request
 
-    usersTable.setAge(request.getAge());
-    usersTable.setEmail(request.getEmail());
-    usersTable.setPassword(request.getPassword());
-    usersTable.setUsername(request.getUsername());
+    usersTable
+        .setAge(request.getAge())
+        .setEmail(request.getEmail())
+        .setPassword(request.getPassword())
+        .setUsername(request.getUsername());
 
     usersTable =
-        userRepo.save(usersTable); // Ask repostiry to save the data from userTable to DB Table
+        userRepo.save(usersTable); // Ask repository to save the data from userTable to DB Table
 
     userResponse.setMessage("User added successfuly"); // Response set
     userResponse.setStatus("Success");
@@ -80,14 +81,11 @@ public class UserManagementService {
   public List<Long> getAllUserIds() {
 
     List<Long> users = userRepo.findByIdOfAllUsers();
-    
+
     return users;
   }
-  
-  
+
   public List<Users> findByUsingEmailAndUserName(String email, String userName) {
-	    return userRepo.findByUsingEmailAndUserNames(email, userName);
-	  }
-  
-  
+    return userRepo.findByUsingEmailAndUserNames(email, userName);
+  }
 }
